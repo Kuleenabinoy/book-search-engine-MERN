@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Jumbotron, Container, CardColumns, Card, Button } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
@@ -13,7 +13,6 @@ const SavedBooks = () => {
 
     const userData = data?.me || [];
 
-    // create function that accepts the book's mongo _id value as param and deletes the book from the database
     const handleDeleteBook = async (bookId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -37,7 +36,8 @@ const SavedBooks = () => {
     if (loading) {
         return <h2>LOADING...</h2>;
     }
-
+    const savedBooksIds = userData.savedBooks.map((book) => book.bookId);
+    savedBooksIds(savedBooksIds);
     return (
         <>
             <Jumbotron fluid className="text-light bg-dark">
